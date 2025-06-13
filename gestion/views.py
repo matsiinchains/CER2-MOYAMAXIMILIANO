@@ -7,7 +7,7 @@ from django.db.models.functions import TruncMonth
 from .forms import FormularioRegistroUsuario, FormularioSolicitud
 from .models import Material, SolicitudRetiro
 
-# REQ03 & REQ04: Vista pública con información y métricas
+
 def home(request):
     materiales = Material.objects.all()
     solicitudes_por_mes = SolicitudRetiro.objects.annotate(mes=TruncMonth('fecha_creacion')).values('mes').annotate(total=Count('id')).order_by('mes')
@@ -20,7 +20,6 @@ def home(request):
     }
     return render(request, 'home.html', context)
 
-# REQ06: Vista para el registro de ciudadanos
 def registro(request):
     if request.method == 'POST':
         form = FormularioRegistroUsuario(request.POST)
@@ -36,13 +35,11 @@ def registro(request):
         form = FormularioRegistroUsuario()
     return render(request, 'registration/register.html', {'form': form})
 
-# REQ08: Panel del ciudadano con historial de solicitudes
 @login_required
 def dashboard(request):
     solicitudes = SolicitudRetiro.objects.filter(ciudadano=request.user)
     return render(request, 'dashboard.html', {'solicitudes': solicitudes})
 
-# REQ07: Vista para crear una nueva solicitud
 @login_required
 def crear_solicitud(request):
     if request.method == 'POST':
