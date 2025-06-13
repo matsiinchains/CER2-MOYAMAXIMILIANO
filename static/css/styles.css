@@ -1,0 +1,18 @@
+.navbar-custom-red {
+    background-color: #c82333; /* Un rojo corporativo */
+}
+
+.btn-danger {
+    background-color: #c82333;
+    border-color: #c82333;
+}
+
+.btn-danger:hover {
+    background-color: #a31c29;
+    border-color: #a31c29;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #fff;
+    background-color: #dc3545;
+}
